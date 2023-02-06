@@ -5,7 +5,7 @@ import os
 import json
 
 
-# AEROAPI_KEY = 'J1usNirxkMs8XSTY3EicZQBBEY5JI9Qe'
+
 AEROAPI_KEY = str(os.getenv('AEROAPI_KEY'))
 AEROAPI = requests.Session()
 AEROAPI.headers.update({"x-apikey": AEROAPI_KEY})
