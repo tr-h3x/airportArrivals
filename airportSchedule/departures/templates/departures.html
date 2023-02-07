@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
     integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew=="
     crossorigin="anonymous" />
-  <title> {{airport}}'s arrival schedule </title>
+  <title> {{airport}} departures schedule </title>
 </head>
 
 <body>
   <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <div class="container">
-      <a href="../" class="navbar-brand">Arrivals <span style="color: rgb(39, 117, 161);"> <strong> - Django
+      <a href="../" class="navbar-brand">Departures <span style="color: rgb(39, 117, 161);"> <strong> - Django
             Framework</strong>
         </span> </a>
       <a href="https://flightaware.com/aeroapi/" class="navbar-tech">AeroAPI</a>
@@ -23,7 +23,7 @@
 
   <br /><br /> <br>
   <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:-50px">
-    <h1 class="display-5">{{ airport|upper }} Arrivals Desktop App </h1>
+    <h1 class="display-5">{{ airport|upper }} Departures Desktop App </h1>
     <h5>Using Python Language and Django Framework</h5>
     <img src="{% static 'images/routes.png' %}" class="image" style="width:350px; margin-bottom:-50px; ">  
   </div>
@@ -42,7 +42,7 @@
   </nav>
   <br> <br>
   <div class="row justify-content-center">
-    {% for i in arrivals %}
+    {% for i in departures %}
     <!-- <div class="col d-flex justify-content-center" > -->
       <div class=" card text-white bg-light mb-6">
       <div class=" card-body">

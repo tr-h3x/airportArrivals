@@ -2,38 +2,30 @@ from django.shortcuts import render
 from datetime import date, timedelta
 import requests
 import os
-import json
-
-
 
 AEROAPI_KEY = str(os.getenv('AEROAPI_KEY'))
 AEROAPI = requests.Session()
 AEROAPI.headers.update({"x-apikey": AEROAPI_KEY})
 
-def index(request):
-    return render(request, 'home.html' )
-
-def arrivals(request):
+def departures(request):
 
     if request.method == "POST":
         airport = request.POST['airport']
         today = date.today()
         yesterday = today - timedelta(1)
         tomorrow = today + timedelta(1)
-        results = AEROAPI.get(f"https://aeroapi.flightaware.com/aeroapi/airports/{airport}/flights/arrivals?start={today}&end={tomorrow}&max_pages=10")
+        results = AEROAPI.get(f"https://aeroapi.flightaware.com/aeroapi/airports/{airport}/flights/departures?start={today}&end={tomorrow}&max_pages=10")
 
         schedule = results.json()
 
-        arrivals = schedule['arrivals']
+        departures = schedule['departures']
         
         context = {
-            'arrivals': arrivals,
+            'departures': departures,
             'airport': airport,
         }
 
-        print(arrivals)
+        print(departures)
     else: 
         context = {}
-    return render(request, 'arrivals.html', context )
-
-
+    return render(request, 'departures.html', context )
