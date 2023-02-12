@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv() 
 
-AEROAPI_KEY = str(os.getenv('AEROAPI_KEY'))
+AEROAPI_KEY = os.getenv('AEROAPI_KEY')
 # dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 # load_dotenv(dotenv_path)
 
