@@ -12,31 +12,37 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv() 
+#for production: create json w apikey and pass as value in path
+#AEROAPI_KEY = os.getenv('AEROAPI_KEY')
+with open(os.path.join(BASE_DIR, 'aeroapi_key.txt')) as f:
+    AEROAPI_KEY = f.read().strip()
 
-AEROAPI_KEY = os.getenv('AEROAPI_KEY')
 # dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 # load_dotenv(dotenv_path)
 
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9eylkyrok@k80+p616didat=_t-0+xi9lv%sueby+mam=%y+&b"
+with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '34.170.234.189'
+]
 
 
 # Application definition
@@ -67,7 +73,7 @@ ROOT_URLCONF = "airportSchedule.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ['templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = 'images/'
 
 STATICFILES_DIRS = (
@@ -133,3 +140,13 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#HTTPS settings
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+#HSTS settings
+SECURE_HSTS_SECONDS = 31536000 #1 YEAR
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True 
