@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from datetime import date, timedelta
+from django.conf import settings
 import requests
 import os
 
-AEROAPI_KEY = str(os.getenv('AEROAPI_KEY'))
+#AEROAPI_KEY = str(os.getenv('AEROAPI_KEY'))
+AEROAPI_KEY = getattr(settings, "AEROAPI_KEY", None)
 AEROAPI = requests.Session()
 AEROAPI.headers.update({"x-apikey": AEROAPI_KEY})
 

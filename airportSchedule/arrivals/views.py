@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from datetime import date, timedelta
+from django.conf import settings
 import requests
-import os
-import json
+#import os
+#import json
 
 
 
-AEROAPI_KEY = os.getenv('AEROAPI_KEY')
+#AEROAPI_KEY = os.getenv('AEROAPI_KEY')
+AEROAPI_KEY = getattr(settings, "AEROAPI_KEY", None)
 AEROAPI = requests.Session()
 AEROAPI.headers.update({"x-apikey": AEROAPI_KEY})
 
